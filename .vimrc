@@ -1,17 +1,14 @@
 let mapleader = ","
-
- set number
+syntax on
+set number
+set list
 set relativenumber
 "no compatible
 set nocp
-" show spaces as ·
-set listchars+=space:·
 
-syntax on 
-" Install VimPlug with 
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 call plug#begin()
-  
+
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
@@ -25,6 +22,18 @@ call plug#end()
 " but on other change to the output value of `which fzf`
 set rtp+=/opt/homebrew/opt/fzf
 
+" On python, spaces/indents are especially important, so we highlight them up!
+" show spaces as ·
+set listchars+=space:·
+" show end of lines as return character 
+set listchars+=eol:⏎
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+colorscheme PaperColor
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 nnoremap <Leader>wn :match ExtraWhitespace /^\s* \s*\<Bar>\s\+$/<CR>
 nnoremap <Leader>wf :match<CR>
 
@@ -33,4 +42,3 @@ nnoremap <Leader>wf :match<CR>
 noremap <leader>f :Files<CR>
 "shows all git files in the current directory
 noremap <leader>gf :GFiles<CR>
-
