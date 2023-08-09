@@ -1,10 +1,26 @@
 let mapleader = ","
+
+" set syntax highlighting
 syntax on
-set number
-set list
+
+
+" show relative number
 set relativenumber
+
+" show line numbers
+set number
+
+" will show all whitespaces as a character.
+set list
+
 "no compatible
 set nocp
+
+"  exit insert mode using 'jj'
+inoremap jj <ESC>
+
+" set dark background
+set background=dark
 
 
 call plug#begin()
@@ -27,6 +43,7 @@ set rtp+=/opt/homebrew/opt/fzf
 set listchars+=space:·
 " show end of lines as return character 
 set listchars+=eol:⏎
+
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 colorscheme PaperColor
 match ExtraWhitespace /\s\+$/
